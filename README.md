@@ -1,3 +1,4 @@
+# hub_minr
 This is a set of functions and scripts for a) extracting all human-written text from pull requests, b) cleaning and structuring the data in a well-organized way, and c) performing text mining (topic modeling) on the dataset so as to classify distinct text comments into conceptual categories.
 
 ## Requirements
@@ -8,7 +9,7 @@ This is a set of functions and scripts for a) extracting all human-written text 
 * Use the package 'LDAvis' to visualize multiple topic modeling solutions
 * Provide ways to correlate topics with other code metrics
 
-# Modus Operandi
+## Modus Operandi
 A couple of notes on how we work:
 
 * We will be working using a pull request model. This will allow me to review and understand the code you write as we go along.
