@@ -13,3 +13,14 @@ client.issue_comments("octocat/Spoon-Knife", 1176).each do |comment|
 
   puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
 end
+
+Procedure
+# github api access, Oauth, rgithub changes, have to study about the rgithub changes you made and how to get it
+library(httr)
+oauth_endpoints("github")
+myapp <- oauth_app("github", "56b637a5baffac62cad9") #REQUESTING FOR API ACCESS
+github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+gtoken <- config(token = github_token)
+req <- GET("https://api.github.com/rate_limit", gtoken)
+stop_for_status(req)
+content(req)
