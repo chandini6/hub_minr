@@ -1,13 +1,11 @@
-Procedure
-# github api access, Oauth, rgithub changes, have to study about the rgithub changes you made and how to get it
-library(httr)
-oauth_endpoints("github")
-myapp <- oauth_app("github", "56b637a5baffac62cad9") #REQUESTING FOR API ACCESS
-github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
-gtoken <- config(token = github_token)
-req <- GET("https://api.github.com/rate_limit", gtoken)
-stop_for_status(req)
-content(req)
+#Different ways for dealing with deal with the login
+ctx <- interactive.login(client_id, client_secret,
+    scopes = NULL, base_url = "https://github.com",
+    api_url = "https://api.github.com", max_etags = 10000)
+
+#with source
+ctx <- interactive.login(source(credentials.R, echo =True)
+
 
 #ADDING A INTERACTIVE LOGIN CREDENTIALS IN R
 getLoginDetails <- function(){
