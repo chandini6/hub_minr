@@ -1,3 +1,25 @@
+#topic modelling & optimizing no of topics& Lda working In r
+
+library(devtools)
+install_github(ropensci/efile)
+library(efile)
+library(topicmodels)
+raw <- searchelife(terms = "*", searchin = "topic_title", boolean = "matches")
+
+abstarcts <- sapply(raw, function(x) elife_doi(x, ret = "abstract")) #for obtaining the abstract of the topics in the request
+areas <- sapply(raw, function(x) elife_doi(x, ret = "subject_area")) #for the obtaining the topic_area 
+dates <- sapply(raw, function(x) elife_doi(x, ret = "pub_date_date") #for obtaining the comment date
+
+Future plan 
+Data preprocessing matrix of the comments
+creating the corpus
+Tokenizing the words
+Finding the most frequent bi grams & trigrams for the given corpus
+
+
+
+
+
 #Different ways for dealing with deal with the login
 ctx <- interactive.login(client_id, client_secret,
     scopes = NULL, base_url = "https://github.com",
