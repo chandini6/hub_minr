@@ -12,6 +12,30 @@ dates <- sapply(raw, function(x) elife_doi(x, ret = "pub_date_date") #for obtain
 
 Future plan 
 Data preprocessing matrix of the comments
+
+library(elife) # pacakage to be downloaded from github
+library(tm)
+library(topicmodels)
+library(LDAvis)
+
+comments <- read.csv(filepath)
+abstarcts <- sapply(raw, function(x) elife_doi(x, ret = "abstract")) #for obtaining the abstract of the topics in the request
+# preprocessing the data
+
+dtm.control <- list( tolower = True, #converting to lowercase
+removePunctuation = True, #removing punctuation
+removenumbers = True,  #numbers deletion
+stopwords = stopwords('english') #removing stopwords
+stemming = True, # removing suffixes
+wordslength = c(5, Inf)
+weighting = weightTF)
+
+corp <- Corpus(VectorSource(unlist(abstracts, use.names = False))
+dtm <- DocumentTermMatrix(corp, control = dtm.control)
+dim(dtm)
+dtm <- removeSparseTerms(dtm, 0.99)
+
+
 creating the corpus
 Tokenizing the words
 Finding the most frequent bi grams & trigrams for the given corpus
