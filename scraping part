@@ -18,6 +18,7 @@ stop_for_status(request1)
 
 #the content should the comment , id, dates & all the commits included, Using this json document we can preprocess the data to the abstract 
 # if the code gives some I have check with the syntax of ouath_app again
+#there are certain issues in running this with R studio , I will check and update them tommarow
 
 
 
