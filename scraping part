@@ -1,3 +1,35 @@
+#getting the content of pull request comment pages in jsonfiles
+install.packages("jsonlite")
+library('jsonlite')
+install.packages('httpuv')
+library(httpuv)
+install.packages('httr')
+library('httr')
+
+myapi <- oauth_app("github" "3f2c05f63b3d9cebf87f", secret="03554cba5aa1d4730737ce85cf8d0ccd599dc661")
+
+github_token <- oauth2.0_token(oauth_endpoints("github", myapi)
+                               
+request1 <- GET("https://github.com/aronlindberg/hub_minr/pull/1",config(token=github_token))
+myjson <- content(request1)
+myjson2 <- jsonlite::fromJSON(toJSON(myjson))
+view(myjson2)
+stop_for_status(request1)
+
+#the content should the comment , id, dates & all the commits included, Using this json document we can preprocess the data to the abstract 
+# if the code gives some I have check with the syntax of ouath_app again
+
+
+
+
+
+
+
+
+
+
+
+
 #topic modelling & optimizing no of topics& Lda working In r
 
 library(devtools)
