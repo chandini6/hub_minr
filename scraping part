@@ -1,3 +1,23 @@
+#changes in the require packages 
+require_packages <- c('rgithub','roxygen2')
+if(require_packages == c('rgithub'))
+{
+    install.packages("devtools")
+    require(devtools)
+    install_github("cscheid/rgithub")
+}
+library(github)
+
+
+
+
+
+
+
+
+
+
+
 #getting the content of pull request comment pages in jsonfiles
 install.packages("jsonlite")
 library('jsonlite')
