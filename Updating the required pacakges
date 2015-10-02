@@ -1,0 +1,10 @@
+require_packages <- c('rgithub','roxygen2','plyr')
+if(require_packages == c('rgithub'))
+{
+    install.packages("devtools")
+    require(devtools)
+    install_github("cscheid/rgithub")
+    install.packages('plyr')
+}
+library(github)
+ctx = interactive.login("cb8be391fd206036d2f8", "00a14e9088b47db588e95515a729b5c89448b6a8")
