@@ -1,0 +1,44 @@
+digest_header_links <- function(x) {
+  y <- x$headers$link
+  if(is.null(y)) {
+    # message("No links found in header.")
+    m <- matrix(0, ncol = 3, nrow = 4)
+    links <- as.data.frame(m)
+    names(links) <- c("rel", "per_page", "page")
+    return(links)
+  }
+  y %>%
+    str_split(", ") %>% unlist %>%  # split into e.g. next, last, first, prev
+    str_split_fixed("; ", 2) %>%    # separate URL from the relation
+    plyr::alply(2) %>%              # workaround: make into a list
+    as.data.frame() %>%        # convert to data.frame, no factors!
+    setNames(c("URL", "rel")) %>%   # sane names
+    dplyr::mutate_(rel = ~ str_match(rel, "next|last|first|prev"),
+                   per_page = ~ str_match(URL, "per_page=([0-9]+)") %>%
+                     `[`( , 2) %>% as.integer,
+                   page = ~ str_match(URL, "&page=([0-9]+)") %>%
+                     `[`( , 2) %>% as.integer,
+                   URL = ~ str_replace_all(URL, "<|>", ""))
+}
+
+owner = "rubinius"
+repo = "rubinius"
+
+issues<- function(owner, repo){
+allissues <- get.repository.issues(owner,repo, ..., ctx = get.github.context())
+ # get.number.issues(owner = owner, repo =repo, ctx= get.github.context)
+links <- digest_header_links(allissues)
+number_of_pages <- links[2,]$page
+if (number_of_pages != 0)
+  try_default(for (n in 1:number_of_pages){
+    if (as.integer(commits$headers$`x-ratelimit-remaining`) < 5)
+      Sys.sleep(as.integer(commits$headers$`x-ratelimit-reset`)-as.POSIXct(Sys.time()) %>% as.integer())
+    else
+      get.repository.issues(owner = owner, repo = repo, number = i, ctx = get.github.context(), per_page=100, page = n)
+    }, default = NULL)
+else 
+  return(allissues)
+}
+
+issues_list <- issues(rubinius,rubinius)
+issues_list
